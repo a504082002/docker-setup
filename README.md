@@ -8,6 +8,7 @@ This is a personal setup file for docker.
 
 ### **Applications support**
 * rstudio
+* ipython with numpy, scipy
 
 ## **How to use**
 just pull the bash script down to your local directory:

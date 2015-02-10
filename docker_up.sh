@@ -14,14 +14,30 @@ function rstudioUp(){
     echo "Open 120.126.36.164:$openport."
     echo "Login with account: rstudio and password: rstudio."
     echo "$HOME is mounted on $HOME."
-    # docker_stop.sh is not yet published.
-    #echo "To stop server, please execute docker_stop.sh."
-    echo "To stop server, please execute the following command:"
-    echo "docker stop [CONTAINER_NAME] && docker rm [CONTAINER_NAME]"
+    echo "To stop server, please execute:"
+    echo "./docker_stop.sh $dockername"
 }
 
 function ipythonUp(){
+    dockername=${USER}_ipython
+    declare -i ipythonport="8888"
 
+    docker run -d -P \
+      --name $dockername \
+      -e "PASSWORD=ipython" \
+      -e "USE_HTTP=1" \
+      -v $HOME:$HOME \
+      ipython/scipyserver
+
+    ipWithPort=$(docker port $dockername $ipythonport)
+    declare -i openport=${ipWithPort#0.0.0.0:}
+
+    echo "CONTAINER_NAME: $dockername"
+    echo "Open 120.126.36.164:$openport."
+    echo "Login with password: ipython."
+    echo "$HOME is mounted on $HOME."
+    echo "To stop server, please execute:"
+    echo "./docker_stop.sh $dockername"
 }
 
 
