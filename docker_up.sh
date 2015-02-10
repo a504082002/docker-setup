@@ -4,16 +4,16 @@ function rstudioUp(){
 
     docker run -d -P \
       --name $dockername \
-      -v $HOME:$HOME \
+      -v $HOME:/home/rstudio \
       rocker/rstudio
 
     ipWithPort=$(docker port $dockername $rstudioport)
     declare -i openport=${ipWithPort#0.0.0.0:}
 
     echo "CONTAINER_NAME: $dockername"
-    echo "Open 120.126.36.164:$openport."
+    echo "Open 120.126.36.164:$openport in your browser."
     echo "Login with account: rstudio and password: rstudio."
-    echo "$HOME is mounted on $HOME."
+    echo "$HOME is mounted on /home/rstudio."
     echo "To stop server, please execute:"
     echo "./docker_stop.sh $dockername"
 }
@@ -26,16 +26,16 @@ function ipythonUp(){
       --name $dockername \
       -e "PASSWORD=ipython" \
       -e "USE_HTTP=1" \
-      -v $HOME:$HOME \
+      -v $HOME:/notebooks \
       ipython/scipyserver
 
     ipWithPort=$(docker port $dockername $ipythonport)
     declare -i openport=${ipWithPort#0.0.0.0:}
 
     echo "CONTAINER_NAME: $dockername"
-    echo "Open 120.126.36.164:$openport."
+    echo "Open 120.126.36.164:$openport in your browser."
     echo "Login with password: ipython."
-    echo "$HOME is mounted on $HOME."
+    echo "$HOME is mounted on /notebooks."
     echo "To stop server, please execute:"
     echo "./docker_stop.sh $dockername"
 }
