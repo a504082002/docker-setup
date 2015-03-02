@@ -10,10 +10,13 @@ function rstudioUp(){
     ipWithPort=$(docker port $dockername $rstudioport)
     declare -i openport=${ipWithPort#0.0.0.0:}
 
+    echo "==========================="
     echo "CONTAINER_NAME: $dockername"
+    echo "==========================="
     echo "Open 120.126.36.164:$openport in your browser."
     echo "Login with account: rstudio and password: rstudio."
     echo "$HOME is mounted on /home/rstudio."
+    echo "==========================="
     echo "To stop server, please execute:"
     echo "./docker_stop.sh $dockername"
 }
@@ -32,16 +35,18 @@ function ipythonUp(){
     ipWithPort=$(docker port $dockername $ipythonport)
     declare -i openport=${ipWithPort#0.0.0.0:}
 
+    echo "==========================="
     echo "CONTAINER_NAME: $dockername"
+    echo "==========================="
     echo "Open 120.126.36.164:$openport in your browser."
     echo "Login with password: ipython."
     echo "$HOME is mounted on /notebooks."
+    echo "==========================="
     echo "To stop server, please execute:"
     echo "./docker_stop.sh $dockername"
 }
 
 function shinyUp(){
-    # if [ -z "$1" ]; then echo "var is unset"; fi
     dockername=${USER}_shiny
     declare -i shinyport="3838"
 
@@ -50,15 +55,19 @@ function shinyUp(){
       -v $1:/srv/shiny-server/ \  # $1 is where you place shinyapps
       -v /srv/shinylog/:/var/log/ \
       -v $HOME:$HOME \
-      rocker/shiny:latest
+      rocker/shiny
 
     ipWithPort=$(docker port $dockername $shinyport)
     declare -i openport=${ipWithPort#0.0.0.0:}
 
+    echo "==========================="
     echo "CONTAINER_NAME: $dockername"
+    echo "==========================="
     echo "Open 120.126.36.164:$openport in your browser."
+    echo "$1 is mounted on /srv/shiny-server/."
+    echo "/srv/shinylog/ is mounted on /var/log/ for logs."
     echo "$HOME is mounted on $HOME."
-    echo "Write logs in /srv/shinylog/"
+    echo "==========================="
     echo "To stop server, please execute:"
     echo "./docker_stop.sh $dockername"
 }
