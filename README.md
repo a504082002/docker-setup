@@ -1,6 +1,6 @@
 # Docker-setup
 
-This is a personal setup file for docker.
+This is a personal setup script for docker-hosted services.
 
 ### **Features**
 * mapping service exposed port to host high port (49153~65535) automatically
@@ -9,6 +9,7 @@ This is a personal setup file for docker.
 ### **Applications support**
 * rstudio
 * ipython with numpy, scipy
+* shiny
 
 ## **How to use**
 just pull the bash script down to your local directory:

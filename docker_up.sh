@@ -52,7 +52,7 @@ function shinyUp(){
 
     docker run -d -P \
       --name $dockername \
-      -v $1:/srv/shiny-server/ \  # $1 is where you place shinyapps
+      -v $1:/srv/shiny-server/ \
       -v /srv/shinylog/:/var/log/ \
       -v $HOME:$HOME \
       rocker/shiny
