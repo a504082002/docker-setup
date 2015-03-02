@@ -50,7 +50,7 @@ function shinyUp(){
       -v $1:/srv/shiny-server/ \  # $1 is where you place shinyapps
       -v /srv/shinylog/:/var/log/ \
       -v $HOME:$HOME \
-      rocker/shiny
+      rocker/shiny:latest
 
     ipWithPort=$(docker port $dockername $shinyport)
     declare -i openport=${ipWithPort#0.0.0.0:}
