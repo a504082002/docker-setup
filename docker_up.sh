@@ -5,7 +5,7 @@ function rstudioUp(){
     docker run -d -P \
       --name $dockername \
       -v $HOME:/home/rstudio \
-      rocker/rstudio
+      a504082002/rstudio
 
     ipWithPort=$(docker port $dockername $rstudioport)
     declare -i openport=${ipWithPort#0.0.0.0:}
